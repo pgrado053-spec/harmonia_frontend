@@ -1,32 +1,24 @@
-import PageWrapper from "../components/PageWrapper";
-import { motion } from "framer-motion";
+import Navbar from "../components/Navbar";
 
 export default function Diary() {
   return (
-    <PageWrapper>
-      <div className="max-w-2xl mx-auto">
+    <div>
+      <Navbar />
 
-        <motion.h1
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-4xl font-bold text-center text-purple-700 dark:text-purple-300 mb-6"
-        >
-          Mi Diario 📘
-        </motion.h1>
+      <div className="px-6 py-10 max-w-2xl mx-auto">
+        <h1 className="text-4xl font-bold text-purple-700 dark:text-purple-300 mb-4 text-center">
+          Mi Diario 📓
+        </h1>
 
         <textarea
-          className="w-full min-h-[250px] p-4 bg-white dark:bg-gray-800 border rounded-xl shadow"
-          placeholder="Escribe lo que sientes hoy…"
+          className="w-full min-h-[250px] p-4 border rounded-xl shadow focus:ring-purple-500 outline-none dark:bg-gray-800 dark:text-white"
+          placeholder="Escribe cómo te sientes hoy..."
         />
 
-        <motion.button
-          whileTap={{ scale: 0.95 }}
-          className="btn-primary w-full mt-4"
-        >
+        <button className="mt-4 w-full bg-purple-700 text-white py-3 rounded-xl hover:bg-purple-800">
           Guardar entrada
-        </motion.button>
-
+        </button>
       </div>
-    </PageWrapper>
+    </div>
   );
 }

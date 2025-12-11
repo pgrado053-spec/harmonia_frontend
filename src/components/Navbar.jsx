@@ -1,9 +1,12 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
-import { motion } from "framer-motion";
 
 export default function Navbar() {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const loggedIn = Boolean(localStorage.getItem("token"));
+
   const menu = [
     { name: "Inicio", path: "/" },
     { name: "Foro", path: "/forum" },
@@ -12,29 +15,27 @@ export default function Navbar() {
     { name: "Emergencia", path: "/emergency" },
   ];
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
   return (
-    <motion.nav
-      initial={{ opacity: 0, y: -15 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="fixed top-0 left-0 w-full bg-white/50 dark:bg-gray-900/30 
-                 backdrop-blur-xl border-b border-gray-200 dark:border-gray-700 
-                 shadow-sm z-50"
-    >
-      <div className="max-w-6xl mx-auto px-6 py-3 flex justify-between items-center">
+    <nav className="fixed top-0 left-0 w-full bg-white/60 dark:bg-gray-900/40 backdrop-blur-xl border-b shadow z-50">
+      <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
 
         <Link to="/" className="text-2xl font-bold text-purple-700 dark:text-purple-300">
           Harmonia
         </Link>
 
         <div className="hidden md:flex gap-6 text-gray-700 dark:text-gray-300">
-          {menu.map((item) => (
+          {menu.map(item => (
             <Link
               key={item.path}
               to={item.path}
               className={`hover:text-purple-600 dark:hover:text-purple-300 ${
-                location.pathname === item.path
-                  ? "text-purple-600 dark:text-purple-300 font-semibold"
-                  : ""
+                location.pathname === item.path ? "text-purple-600 dark:text-purple-300 font-semibold" : ""
               }`}
             >
               {item.name}
@@ -42,8 +43,27 @@ export default function Navbar() {
           ))}
         </div>
 
-        <ThemeToggle />
+        <div className="flex items-center gap-4">
+          <ThemeToggle />
+
+          {loggedIn ? (
+            <button
+              onClick={logout}
+              className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700"
+            >
+              Cerrar sesión
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="px-4 py-2 rounded-lg bg-purple-600 text-white hover:bg-purple-700"
+            >
+              Iniciar sesión
+            </Link>
+          )}
+        </div>
+
       </div>
-    </motion.nav>
+    </nav>
   );
 }

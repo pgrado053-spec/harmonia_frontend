@@ -6,11 +6,11 @@ import { Link } from "react-router-dom";
 export default function Home() {
   return (
     <PageWrapper>
-      <div className="flex flex-col items-center text-center pt-20">
+      <div className="flex flex-col items-center text-center">
 
         <motion.img
           src={hero}
-          alt="Ilustración calmante"
+          alt="Paisaje calmante"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="w-full max-w-xl mt-6 mb-4"
@@ -52,6 +52,7 @@ export default function Home() {
             Iniciar sesión
           </Link>
         </motion.div>
+
       </div>
     </PageWrapper>
   );
