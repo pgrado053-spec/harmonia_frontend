@@ -1,58 +1,87 @@
 import PageWrapper from "../components/PageWrapper";
 import { motion } from "framer-motion";
-import hero from "../assets/hero-illustration.svg";
+import hero from "../assets/home-hero.png"; 
 import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
     <PageWrapper>
-      <div className="flex flex-col items-center text-center">
+      <div className="max-w-6xl mx-auto min-h-[calc(100vh-5rem)] flex items-center">
+        {/* Grid 50/50 */}
+        <div className="grid md:grid-cols-2 gap-12 w-full items-center">
+          {/* Columna imagen */}
+          <div className="relative h-[260px] sm:h-[320px] md:h-[420px] lg:h-[480px] rounded-3xl overflow-hidden shadow-lg">
+            <motion.img
+              src={hero}
+              alt="Madre e hija usando una tablet"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7 }}
+              className="w-full h-full object-cover"
+            />
+          </div>
 
-        <motion.img
-          src={hero}
-          alt="Paisaje calmante"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="w-full max-w-xl mt-6 mb-4"
-        />
+          {/* Columna texto */}
+          <div className="text-center md:text-left flex flex-col justify-center">
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.1 }}
+              className="text-sm font-medium text-[#00666b] mb-2"
+            >
+              Confiable y accesible para todos
+            </motion.p>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-5xl md:text-6xl font-bold text-purple-700 dark:text-purple-300"
-        >
-          Respira. Conecta. Sana.
-        </motion.h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 }}
+              className="text-4xl md:text-5xl font-bold text-[#004f54] mb-4"
+            >
+              Harmonia
+            </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="mt-4 text-lg md:text-xl max-w-xl text-gray-600 dark:text-gray-300"
-        >
-          Tu espacio seguro para crecer emocionalmente, con calma y esperanza.
-        </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-lg md:text-2xl text-[#004f54] mb-4"
+            >
+              Apoyo emocional en línea para acompañarte en tu día a día.
+            </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="flex gap-4 mt-8"
-        >
-          <Link
-            to="/onboarding"
-            className="px-8 py-3 bg-purple-600 text-white rounded-full shadow hover:scale-105 transition"
-          >
-            Comenzar
-          </Link>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.25 }}
+              className="text-base md:text-lg text-gray-700 mb-8"
+            >
+              Un espacio seguro donde puedes aprender, expresarte y conectar
+              con herramientas pensadas para tu bienestar.
+            </motion.p>
 
-          <Link
-            to="/login"
-            className="px-8 py-3 border-2 border-purple-600 text-purple-600 dark:text-purple-300
-                       rounded-full hover:bg-purple-50 transition"
-          >
-            Iniciar sesión
-          </Link>
-        </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
+              <Link
+                to="/onboarding"
+                className="px-8 py-3 rounded-full bg-[#00a896] text-white text-sm font-semibold hover:bg-[#008f7a] transition-colors text-center"
+              >
+                Empezar ahora
+              </Link>
 
+              <Link
+                to="/login"
+                className="px-8 py-3 rounded-full border-2 border-[#004f54] text-[#004f54] text-sm font-semibold hover:bg-[#004f54] hover:text-white transition-colors text-center"
+              >
+                Iniciar sesión
+              </Link>
+            </motion.div>
+          </div>
+        </div>
       </div>
     </PageWrapper>
   );
