@@ -1,1 +1,1 @@
-export const API_URL = "https://harmoniabackend.onrender.com";
+export const API_URL = "https://harmoniabackend.onrender.com/api";

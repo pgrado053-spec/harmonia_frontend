@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { API_URL } from "../api"; // 👈 usamos la URL del backend
 
 export default function Register() {
   const navigate = useNavigate();
@@ -22,19 +23,25 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:4000/api/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
+    try {
+      const res = await fetch(`${API_URL}/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (res.ok) {
-      alert("Registro exitoso. Ahora puedes iniciar sesión.");
-      navigate("/login");
-    } else {
-      alert(data.msg);
+      if (res.ok) {
+        alert("Registro exitoso. Ahora puedes iniciar sesión.");
+        navigate("/login");
+      } else {
+        // si el backend manda msg la mostramos, si no un genérico
+        alert(data.msg || "Ocurrió un error al registrar el usuario.");
+      }
+    } catch (err) {
+      console.error("Error en el registro:", err);
+      alert("No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.");
     }
   };
 
