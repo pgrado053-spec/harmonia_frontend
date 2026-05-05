@@ -1,5 +1,7 @@
-import { useState } from "react";
+// src/pages/Forum.jsx
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
+import { API_URL } from "../api";
 
 const initialPosts = [
   {
@@ -28,12 +30,50 @@ const initialPosts = [
 export default function Forum() {
   const [posts, setPosts] = useState(initialPosts);
   const [replyDrafts, setReplyDrafts] = useState({});
+  const [loadingReplies, setLoadingReplies] = useState(false);
+
+  // Cargar respuestas guardadas en el backend al entrar a la página
+  useEffect(() => {
+    const loadReplies = async () => {
+      try {
+        setLoadingReplies(true);
+
+        const updated = await Promise.all(
+          initialPosts.map(async (p) => {
+            try {
+              const res = await fetch(`${API_URL}/forum/${p.id}/replies`);
+              const data = await res.json().catch(() => []);
+
+              if (!res.ok) {
+                console.error(
+                  "Error cargando replies post",
+                  p.id,
+                  res.status,
+                  data
+                );
+                return p;
+              }
+
+              return { ...p, replies: data };
+            } catch (err) {
+              console.error("Error fetch replies post", p.id, err);
+              return p;
+            }
+          })
+        );
+
+        setPosts(updated);
+      } finally {
+        setLoadingReplies(false);
+      }
+    };
+
+    loadReplies();
+  }, []);
 
   const toggleLike = (id) => {
     setPosts((prev) =>
-      prev.map((p) =>
-        p.id === id ? { ...p, liked: !p.liked } : p
-      )
+      prev.map((p) => (p.id === id ? { ...p, liked: !p.liked } : p))
     );
   };
 
@@ -44,29 +84,43 @@ export default function Forum() {
     }));
   };
 
-  const handleReplySubmit = (id) => {
+  const handleReplySubmit = async (id) => {
     const text = (replyDrafts[id] || "").trim();
     if (!text) return;
 
-    setPosts((prev) =>
-      prev.map((p) =>
-        p.id === id
-          ? { ...p, replies: [...p.replies, { text }] }
-          : p
-      )
-    );
+    try {
+      const res = await fetch(`${API_URL}/forum/reply`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ postId: id, text }),
+      });
 
-    setReplyDrafts((prev) => ({
-      ...prev,
-      [id]: "",
-    }));
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok) {
+        console.error("Error backend foro:", res.status, data);
+        throw new Error("Respuesta no OK");
+      }
+
+      // Si el backend respondió bien, actualizamos el estado local
+      setPosts((prev) =>
+        prev.map((p) =>
+          p.id === id ? { ...p, replies: [...p.replies, { text }] } : p
+        )
+      );
+
+      setReplyDrafts((prev) => ({ ...prev, [id]: "" }));
+    } catch (err) {
+      console.error("Error guardando respuesta foro:", err);
+      alert("No se pudo guardar la respuesta. Intenta más tarde.");
+    }
   };
 
   return (
     <div>
       <Navbar />
 
-      <div className="pt-24 px-4 pb-16">
+      <div className="pt-24 px-4 pb-16 bg-[#FFFAF0] min-h-screen">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-3xl md:text-4xl text-center font-bold text-[#004f54] mb-2">
             Foro de apoyo
@@ -75,6 +129,12 @@ export default function Forum() {
             Lee experiencias de otras personas y comparte lo que estás
             viviendo. Este espacio busca acompañamiento y respeto.
           </p>
+
+          {loadingReplies && (
+            <p className="text-center text-sm text-gray-500 mb-4">
+              Cargando respuestas...
+            </p>
+          )}
 
           <div className="space-y-4">
             {posts.map((p) => (

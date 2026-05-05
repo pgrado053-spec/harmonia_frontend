@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Estilo global del body */
 body {
-  @apply bg-white dark:bg-gray-900 transition-colors;
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #799ce7; /* fondo clarito tipo landing médica */
+  color: #079999;            /* texto oscuro verdoso */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

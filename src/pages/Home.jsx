@@ -29,7 +29,7 @@ export default function Home() {
               transition={{ delay: 0.1 }}
               className="text-sm font-medium text-[#00666b] mb-2"
             >
-              Confiable y accesible para todos
+              Confiable y accesible 
             </motion.p>
 
             <motion.h1
@@ -47,7 +47,7 @@ export default function Home() {
               transition={{ delay: 0.2 }}
               className="text-lg md:text-2xl text-[#004f54] mb-4"
             >
-              Apoyo emocional en línea para acompañarte en tu día a día.
+              Apoyo profesional en línea para acompañarte en tu día a día.
             </motion.p>
 
             <motion.p
@@ -56,8 +56,7 @@ export default function Home() {
               transition={{ delay: 0.25 }}
               className="text-base md:text-lg text-gray-700 mb-8"
             >
-              Un espacio seguro donde puedes aprender, expresarte y conectar
-              con herramientas pensadas para tu bienestar.
+              Un espacio seguro en el cual puedes expresarte y conectar con las herramientas necesarias para tu bienestar.
             </motion.p>
 
             <motion.div

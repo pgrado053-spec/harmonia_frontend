@@ -9,17 +9,17 @@ const slides = [
   {
     img: step1,
     title: "Bienvenido a Harmonia",
-    text: "Un espacio seguro para explorar y comprender tus emociones.",
+    text: "Este es un espacio seguro para ti. Aquí no hay juicios, solo apoyo, información y acompañamiento en tu proceso.",
   },
   {
     img: step2,
     title: "Aprende y crece",
-    text: "Te ofrecemos herramientas claras para transformar tu día a día.",
+    text: "Comunícate de forma segura con tus medicos. Te ofrecemos herramientas",
   },
   {
     img: step3,
     title: "Acompañamiento constante",
-    text: "No tienes que hacerlo solo. Te acompañamos en cada paso.",
+    text: "Tu valor no depende de tu cuerpo. No tienes que hacerlo solo. No estás solo, este espacio fue creado para caminar contigo.",
   },
 ];
 
@@ -28,7 +28,7 @@ export default function Onboarding() {
   const s = slides[i];
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 bg-[#e1f6f5]">
+    <div className="min-h-screen flex items-center justify-center px-6 bg-[#FFFAF0]">
       <div className="max-w-5xl w-full grid md:grid-cols-2 gap-12 items-center">
         {/* Columna de la imagen */}
         <motion.div

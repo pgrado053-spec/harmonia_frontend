@@ -18,13 +18,16 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setDark(!dark)}
-      className="w-14 h-7 bg-gray-400 dark:bg-gray-600 rounded-full p-1 flex items-center transition-all"
+      className="w-14 h-7 rounded-full p-1 flex items-center transition-all bg-[#00666b] dark:bg-gray-600"
     >
       <div
-        className={`w-5 h-5 rounded-full shadow bg-white transform transition-all ${
-          dark ? "translate-x-7 bg-yellow-400" : "translate-x-0"
+        className={`w-5 h-5 rounded-full shadow transform transition-all ${
+          dark
+            ? "translate-x-7 bg-yellow-400"
+            : "translate-x-0 bg-[#e1f6f5]"
         }`}
       ></div>
     </button>
   );
 }
+

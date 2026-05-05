@@ -49,7 +49,7 @@ export default function Register() {
     <div>
       <Navbar />
 
-      <div className="flex justify-center items-center min-h-screen bg-[#e1f6f5] px-6">
+      <div className="flex justify-center items-center min-h-screen bg-[#FFFAF0] px-6">
         <div className="bg-white shadow-md rounded-2xl p-8 w-full max-w-md border border-[#ccebea]">
           <h2 className="text-2xl md:text-3xl font-semibold text-center text-[#004f54] mb-6">
             Crear cuenta
