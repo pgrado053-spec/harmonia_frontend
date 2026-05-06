@@ -1,6 +1,6 @@
 import PageWrapper from "../components/PageWrapper";
 import { motion } from "framer-motion";
-import hero from "../assets/home-hero.png"; 
+import hero from "../assets/home-hero.png";
 import { Link } from "react-router-dom";
 
 export default function Home() {
@@ -10,14 +10,14 @@ export default function Home() {
         {/* Grid 50/50 */}
         <div className="grid md:grid-cols-2 gap-12 w-full items-center">
           {/* Columna imagen */}
-          <div className="relative h-[260px] sm:h-[320px] md:h-[420px] lg:h-[480px] rounded-3xl overflow-hidden shadow-lg">
+          <div className="relative h-[260px] sm:h-[320px] md:h-[420px] lg:h-[480px] rounded-3xl overflow-hidden shadow-lg bg-white flex items-center justify-center">
             <motion.img
               src={hero}
-              alt="Madre e hija usando una tablet"
+              alt="Persona meditando con luz interior"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7 }}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain p-4"
             />
           </div>
 
@@ -29,7 +29,7 @@ export default function Home() {
               transition={{ delay: 0.1 }}
               className="text-sm font-medium text-[#00666b] mb-2"
             >
-              Confiable y accesible 
+              Confiable y accesible
             </motion.p>
 
             <motion.h1
